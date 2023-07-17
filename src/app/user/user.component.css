@@ -1,0 +1,29 @@
+table {
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border-bottom: 1px solid black;
+    padding: 8px;
+  }
+  /* .table-striped tbody tr:nth-child(even) {
+    background-color: #e3f5fa;
+  } */
+  .table-striped tbody tr:nth-child(odd){
+    background-color: #f2f2f2;
+  }
+  .table-stripped tbody tr:nth-child(even){
+    background-color: black;
+  }
+  .btn {
+    color: #243e56;
+    background: #fbfdff;
+    box-shadow: inset 0 0 0 2px #243e56 ;
+  }
+  .btn:hover {
+      border-radius: 20%;
+  }
+.user{
+	cursor: pointer;
+	text-decoration: underline;
+}

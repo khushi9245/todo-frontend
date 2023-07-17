@@ -1,0 +1,42 @@
+<div class="container" style="width: 100vw;">
+    <div>
+      <h3 class="user" (click)="userreload()">User</h3>
+    </div>
+    <br>
+    <div class="d-flex justify-content-between">
+      <!--add-->
+      <div>
+        <div class="col-4 text-right">
+          <button type="button" id="boot-icon" class="btn" (click)="addUser()" style="height: 40px;">ADD</button>
+        </div>
+      </div>
+      <!--search-->
+      <div>
+        <input type="text" id="search-input" placeholder="Search by user" [(ngModel)]="searchText" (input)="searchData()"
+          style="height: 36px; margin-right: 5px; margin-left: 5px;">
+      </div>
+    </div>
+    <br>
+    <div class="list-group">
+      <div class="list-group-item" *ngFor="let user of filteredUsers | paginate: { itemsPerPage: 6, currentPage: p } ">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{ user.username }}</h5>
+        </div>
+        <p class="mb-1">{{ user.contact }}</p>
+        <p class="mb-1">{{ user.email }}</p>
+        <div class="d-flex justify-content-end">
+          <button type="button" id="boot-icon" class="bi bi-pencil-square"
+            style="font-size: 25px; border: 0px ; color: rgb(38, 101, 227); background: none;" routerLink="../adduser"
+            [queryParams]="{id: user.userid}"></button>
+          <button type="button" id="boot-icon" class="bi bi-trash"
+            style="font-size: 25px; border: 0px solid; color:rgb(192 60 73); background: none;"
+            (click)='removeClick(user.userid)'></button>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="d-flex justify-content-center">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+   </div>
+  </div>
+  

@@ -1,0 +1,79 @@
+<section class="container">
+    <div class="cancel-icon" (click)="ngOnDestroy()" style="padding-left: 350px;">
+      <i class="fa fa-times"></i>
+    </div>
+    <h3 class="text-center">User</h3>
+    <div class="forms">
+      <form [formGroup]="registerForm" (ngSubmit)="OnSubmit()" #addForm="ngForm" class="form form-signup">
+        <fieldset>
+          <div class="input-block">
+            <label for="UserName">Name</label>
+            <input formControlName="UserName"
+              [ngClass]="{'is-invalid': submitted && registerForm.controls['UserName'].errors}" type="text"
+              class="form-control" [(ngModel)]="UserName" id="UserName" name="UserName">
+          </div>
+          <div *ngIf="submitted && registerForm.controls['UserName'].errors" class="text-danger">
+            <small *ngIf="submitted && registerForm.controls['UserName'].errors['required']">
+              Name is required
+            </small>
+          </div>
+          <br>
+  
+          <div class="input-block">
+            <label for="Contact">Contact</label>
+            <input formControlName="Contact"
+              [ngClass]="{'is-invalid': submitted && registerForm.controls['Contact'].errors}" type="text"
+              class="form-control" [(ngModel)]="Contact" id="Contact" name="Contact" minlength="10" maxlength="10"
+              pattern="[0-9]*">
+          </div>
+          <div *ngIf="submitted && registerForm.controls['Contact'].errors" class="text-danger">
+            <small *ngIf="submitted && registerForm.controls['Contact'].errors['required']">
+              Contact is required
+            </small>
+            <small
+              *ngIf="submitted && registerForm.controls['Contact'].errors['minlength'] || registerForm.controls['Contact'].errors['maxlength']">
+              Contact should have 10 digits
+            </small>
+            <small *ngIf="submitted && registerForm.controls['Contact'].errors['pattern']">
+              Numbers only
+            </small>
+          </div>
+          <br>
+  
+          <div class="input-block">
+            <label for="Email">Email</label>
+            <input formControlName="Email" [ngClass]="{'is-invalid': submitted && registerForm.controls['Email'].errors}"
+              type="Email" class="form-control" [(ngModel)]="Email" id="Email" name="Email">
+          </div>
+          <div *ngIf="submitted && registerForm.controls['Email'].errors" class="text-danger">
+            <small *ngIf="submitted && registerForm.controls['Email'].errors['required']">
+              Email is required
+            </small>
+            <small *ngIf="submitted && registerForm.controls['Email'].errors['email']">
+              Invalid email
+            </small>
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="Password">Password</label>
+            <input formControlName="Password"
+              [ngClass]="{'is-invalid': submitted && registerForm.controls['Password'].errors}"
+              type="password" class="form-control"  id="Password">
+            <div *ngIf="submitted && registerForm.controls['Password'].errors" class="text-danger">
+              <small *ngIf="registerForm.controls['Password'].errors['required']">
+                Password is required
+              </small>
+              <small *ngIf="registerForm.controls['Password'].errors['minlength']">
+                Password must contain at least 8 characters
+              </small>
+            </div>
+          </div>
+          <br>
+  
+        </fieldset>
+        <div class="text-center">
+        <button class="btn" type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+  </section>

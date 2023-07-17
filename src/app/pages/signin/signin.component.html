@@ -1,0 +1,114 @@
+<section class="forms-section">
+  <div class="forms">
+    <div class="form-wrapper is-active">
+      <button type="button" class="switcher switcher-login">
+        Login
+        <span class="underline"></span>
+      </button>
+      <form [formGroup]="signinForm" (ngSubmit)="submitSignin()" class="form form-login">
+        <fieldset>
+          <div class="form-group">
+            <label for="Email">Email</label>
+            <input formControlName="Email" [ngClass]="{'is-invalid': submittedSignin && signinForm.controls['Email'].errors}"
+              type="email" class="form-control"  id="Email">
+            <div *ngIf="submittedSignin && signinForm.controls['Email'].errors" class="text-danger">
+              <small *ngIf="signinForm.controls['Email'].errors['required']">
+                Email is required
+              </small>
+              <small *ngIf="signinForm.controls['Email'].errors['email']">
+                Invalid email
+              </small>
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="Password">Password</label>
+            <input formControlName="Password"
+              [ngClass]="{'is-invalid': submittedSignin && signinForm.controls['Password'].errors}"
+              type="password" class="form-control"  id="Password">
+            <div *ngIf="submittedSignin && signinForm.controls['Password'].errors" class="text-danger">
+              <small *ngIf="signinForm.controls['Password'].errors['required']">
+                Password is required
+              </small>
+              <small *ngIf="signinForm.controls['Password'].errors['minlength']">
+                Password must contain at least 8 characters
+              </small>
+            </div>
+          </div>
+           <h6 for="" style="color: darkred ;"  name="Error" >{{ this.Error }}</h6>
+          <br>
+        </fieldset>
+        <button class="btn-signup" type="submit">Continue</button>
+      </form>
+    </div>
+    <div class="form-wrapper">
+      <button type="button" class="switcher switcher-signup">
+        Sign Up
+        <span class="underline"></span>
+      </button>
+      <form [formGroup]="signupForm" (ngSubmit)="submitSignup()" class="form form-signup">
+        <fieldset>
+          <div class="form-group">
+            <label for="AdminName">Name</label>
+            <input formControlName="AdminName" type="text" class="form-control" [ngClass]="{'is-invalid': submittedSignup && signupForm.controls['AdminName'].errors}"
+             [(ngModel)]="AdminName" id="AdminName">
+            <div *ngIf="submittedSignup && signupForm.controls['AdminName'].errors" class="text-danger">
+              <small *ngIf="signupForm.controls['AdminName'].errors['required']">
+                Name is required
+              </small>
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="Contact">Contact</label>
+            <input formControlName="Contact"
+              [ngClass]="{'is-invalid': submittedSignup && signupForm.controls['Contact'].errors}" type="text"
+              class="form-control" id="Contact" [(ngModel)]="Contact" minlength="10" maxlength="10" pattern="[0-9]*">
+            <div *ngIf="submittedSignup && signupForm.controls['Contact'].errors" class="text-danger">
+              <small *ngIf="signupForm.controls['Contact'].errors['required']">
+                Contact is required
+              </small>
+              <small *ngIf="signupForm.controls['Contact'].errors['minlength'] || signupForm.controls['Contact'].errors['maxlength']">
+                Contact should have 10 digits
+              </small>
+              <small *ngIf="signupForm.controls['Contact'].errors['pattern']">
+                Numbers only
+              </small>
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="Email">Email</label>
+            <input formControlName="Email" [ngClass]="{'is-invalid': submittedSignup && signupForm.controls['Email'].errors}"
+              type="email" class="form-control"  id="Email">
+            <div *ngIf="submittedSignup && signupForm.controls['Email'].errors" class="text-danger">
+              <small *ngIf="signupForm.controls['Email'].errors['required']">
+                Email is required
+              </small>
+              <small *ngIf="signupForm.controls['Email'].errors['email']">
+                Invalid email
+              </small>
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="Password">Password</label>
+            <input formControlName="Password"
+              [ngClass]="{'is-invalid': submittedSignup && signupForm.controls['Password'].errors}" type="password"
+              class="form-control"  id="Password">
+            <div *ngIf="submittedSignup && signupForm.controls['Password'].errors" class="text-danger">
+              <small *ngIf="signupForm.controls['Password'].errors['required']">
+                Password is required
+              </small>
+              <small *ngIf="signupForm.controls['Password'].errors['minlength']">
+                Password must contain at least 8 characters
+              </small>
+            </div>
+          </div>
+          <br>
+        </fieldset>
+        <button class="btn-signup" type="submit">Continue</button>
+      </form>
+    </div>
+  </div>
+</section>

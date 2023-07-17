@@ -1,0 +1,25 @@
+.active-link{
+    -webkit-text-fill-color:  #243e56;
+    border-bottom: 2px solid #243e56;
+    font-weight: bold;
+    text-underline-offset: 0.5rem;
+    transform: translateY(-5px);
+   }
+   .navbar-brand {
+    font-size: 1.75rem;
+    letter-spacing: 2px;
+    color:  #243e56;
+  }
+   .nav-link{
+    margin-right: 9px ;
+    font-size: 18px;
+    color:  #243e56;
+  }
+  .nav-link:hover, .nav-link:active{
+    transform: translateY(-5px);
+    color: #95bccc;
+  }
+  .ms-auto{
+    margin-right: 90px;
+  }
+  

@@ -1,0 +1,86 @@
+<section class="container">
+  <div class="cancel-icon" (click)="ngOnDestroy()" style="padding-left: 350px;">
+    <i class="fa fa-times"></i>
+  </div>
+  <h3 class="text-center">TODO</h3>
+  <form (ngSubmit)="OnSubmit()" #addForm="ngForm" class="form" [formGroup]="registerForm">
+    <div class="form-group">
+      <label for="date">Date</label>
+      <input formControlName="Date"
+             [ngClass]="{'is-invalid': submitted && registerForm.controls['Date'].errors}" type="date"
+             class="form-control" [(ngModel)]="Date" id="Date" name="Date">
+    </div>
+    <div *ngIf="submitted && registerForm.controls['Date'].errors" class="text-danger">
+      <small *ngIf="registerForm.controls['Date'].errors['required']">
+        date is required
+      </small>
+      <small *ngIf="registerForm.controls['Date'].errors['pastDate']">
+        Date cannot be before the current date.
+      </small>
+    </div>   
+          
+    <br>
+    <div class="form-group">
+      <label for="Title">Title</label>
+      <input formControlName="Title"
+      [ngClass]="{'is-invalid': submitted && registerForm.controls['Title'].errors}" type="text"
+      class="form-control" [(ngModel)]="Title" id="Title" name="Title">
+  </div>
+  <div *ngIf="submitted && registerForm.controls['Title'].errors" class="text-danger">
+    <small *ngIf="submitted && registerForm.controls['Title'].errors['required']">
+      Title is required
+    </small>
+  </div>
+    <br>
+
+    <div class="form-group">
+      <label for="task">Task</label>
+      <input formControlName="Task"
+              [ngClass]="{'is-invalid': submitted && registerForm.controls['Task'].errors}" type="text"
+              class="form-control" [(ngModel)]="Task" id="Task" name="Task">
+          </div>
+          <div *ngIf="submitted && registerForm.controls['Task'].errors" class="text-danger">
+            <small *ngIf="submitted && registerForm.controls['Task'].errors['required']">
+              task is required
+            </small>
+    </div>
+    <br>
+
+    <div class="form-group">
+      <label for="userid">Name</label>
+      <select formControlName="Name" [ngClass]="{'is-invalid': submitted && registerForm.controls['Name'].errors}"
+       class="form-select" id="userid" name="UserId" [(ngModel)]="UserId">
+        <option *ngFor="let user of User" [value]="user.userid">{{ user.username }}</option>
+      </select>
+      <div *ngIf="submitted && registerForm.controls['Name'].errors" class="text-danger">
+        <small *ngIf="submitted && registerForm.controls['Name'].errors['required']">
+          name is required
+        </small>
+      </div>
+    </div>
+    <br>
+
+    <div class="form-group">
+      <p>
+        <label>
+          Description:
+          <br />
+          <textarea formControlName="Description" [ngClass]="{'is-invalid': submitted && registerForm.controls['Description'].errors}"
+           name="description" cols="100" rows="3" class="form-control" id="description"
+            placeholder="Description" [(ngModel)]="Description">
+          </textarea>
+          <div *ngIf="submitted && registerForm.controls['Description'].errors" class="text-danger">
+            <small *ngIf="submitted && registerForm.controls['Description'].errors['required']">
+              description is required
+            </small>
+          </div>
+        </label>
+      </p>
+    </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn">Save</button>
+    </div>
+    <br>
+  </form>
+</section>

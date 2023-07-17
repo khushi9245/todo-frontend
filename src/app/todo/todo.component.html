@@ -1,0 +1,78 @@
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<div class="container" style="width: 100vw;">
+  <div>
+    <h3 class="todo" (click)="todo()">List</h3>
+  </div>
+  <br>
+  <div class="d-flex justify-content-between">
+    <div>
+      <div class="col-4 text-right">
+        <button type="button" id="boot-icon" class="btn" (click)="onOpenAdd()" style="height: 40px;">ADD</button>
+      </div>
+    </div>
+    <!--date range-->
+    <div class="d-flex">
+      <input type="date" [(ngModel)]="startDate" (ngModelChange)="filterByDateRange()" class="form-control"
+        style="margin-left: 5px; height: 40px;">
+      <input type="date" [(ngModel)]="endDate" (ngModelChange)="filterByDateRange()" class="form-control"
+        style="margin-left: 5px; height: 40px;">
+    </div>
+    <!--search-->
+    <div>
+      <input type="text" id="search-input" placeholder="Search by task or title" [(ngModel)]="searchText"
+        (input)="searchData()" style="height: 40px; margin-right: 5px; margin-left: 5px;">
+    </div>
+    <div class="d-flex align-items-center">
+      <span style="margin-right: 5px; height: 40px; margin-top: 15px;">User:</span>
+      <select [(ngModel)]="selectedUserName" (change)="filterByUserName()" class="form-control">
+        <option value="" selected>Sort by User</option>
+        <option *ngFor="let userName of userNames" [value]="userName">{{ userName }}</option>
+      </select>
+    </div>
+    <!--favourites-->
+    <div>
+      <label>
+        Favorites:
+        <input type="checkbox" [(ngModel)]="showFavoritesOnly" (change)="toggleShowFavoritesOnly()" style="margin-top: 18px;">
+      </label>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-3" *ngFor="let todo of filteredtodos | paginate: { itemsPerPage: 12, currentPage: p } ">
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="star-icon">
+            <i class="bi" type="button" id="boot-icon"
+              [ngClass]="{'bi-star-fill text-warning': todo.isfavourite,'bi-star': !todo.isfavourite }"
+              style="font-size: 25px; border: 0px; background: none;" (click)="toggleFavorite(todo)">
+            </i>
+          </div>
+          <h5 class="card-title">{{ todo.title }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted" style="font-style: italic;">{{ todo.task }}</h6>
+          <p class="card-text">
+            <strong>Date:</strong> {{ todo.date }}<br>
+            <strong>Name:</strong> {{ todo.tblUser?.username }}<br>
+          </p>
+          <div class="d-flex justify-content-end">
+            <td>
+              <button type="button" id="boot-icon" class="card-link" data-toggle="modal" data-target="#todoModal"
+                (click)="onOpenView(todo)" style="margin-top: 10px;">View</button>
+            </td>&nbsp; &nbsp;
+            <td><button type="button" id="boot-icon" class="bi bi-pencil-square"
+                style="font-size: 25px; border: 0px ; color: rgb(38, 101, 227); background: none;"
+                (click)="openEditModal(todo)"></button></td>&nbsp; &nbsp;
+            <td><button type="button" id="boot-icon" class="bi bi-trash"
+                style="font-size: 25px; border: 0px solid; color:rgb(192 60 73); background: none;"
+                (click)='removeClick(todo.todoid)'></button></td>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="d-flex justify-content-center">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
+
